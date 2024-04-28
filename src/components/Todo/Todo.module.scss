@@ -1,0 +1,46 @@
+@import '../../scss/_variables.scss';
+@import '../../scss/mixins.scss';
+
+.todoWrapper {
+    width: calc(100% - 10px);
+    height: 40px;
+    padding: 5px;
+    background: $nile_blue;
+    color: $alto;
+    margin-bottom: 10px;
+    &:last-child {
+        margin-bottom: 0px;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .editWrapper {
+        input {
+            margin-right: 40px;
+        }
+    }
+}
+
+.todo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .buttonsWrapper {
+        @include flex-center;
+    }
+    .name {
+        margin-right: 50px;
+    }
+    button {
+        display: none;
+    }
+    &:hover button {
+        display: block;
+    }
+}
+.deleted {
+    &:hover button {
+        display: none;
+    }
+}

@@ -1,0 +1,15 @@
+@import '../../scss/mixins.scss';
+@import '../../scss/_variables.scss';
+
+.todosContainer {
+    height: 300px;
+    overflow: auto;
+    border: solid 1px $cod_grey;
+    margin-bottom: 50px;
+    .emptyData {
+        width: 100%;
+        @include flex-center;
+        font-size: 20px;
+        line-height: 300px;
+    }
+}

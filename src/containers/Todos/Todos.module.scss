@@ -1,0 +1,16 @@
+@import '../../scss/mixins.scss';
+@import '../../scss/_variables.scss';
+
+.todosPage {
+    width: 100%;
+    height: 100vh;
+    @include flex-center;
+    .todosBlock {
+        border: solid 1px $cod_grey;
+        background: $william;
+        width: 500px;
+        height: 700px;
+        border-radius: 10px;
+        padding: 10px;
+    }
+}
