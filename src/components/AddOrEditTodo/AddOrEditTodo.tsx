@@ -53,7 +53,7 @@ const AddOrEditTodo = ({ onModalChange, setTodoForEditing, todo }: IProps) => {
         addNewTodo({ title: values.input, description: values.textarae }).then(
             res => dispatch(addTodo(res)),
         );
-    }, [onModalChange, setTodoForEditing]);
+    }, [onModalChange, setTodoForEditing, values.input, values.textarae]);
 
     return (
         <div className={styles.modal}>
