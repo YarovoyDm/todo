@@ -1,3 +1,6 @@
+@import "scss/_mixins.scss";
+@import "scss/_variables.scss";
+
 .todo {
     min-height: 63px;
     border-radius: 15px;
@@ -23,10 +26,14 @@
             justify-content: center;
             .todoName {
                 font-size: 9px;
-                color: #6e6a7c;
+                color: $Dolphin;
+                width: 100px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .todoDesription {
-                color: #24252c;
+                color: Shark;
                 font-size: 14px;
                 width: 200px;
                 white-space: nowrap;
@@ -47,7 +54,6 @@
             position: absolute;
             top: 8px;
             left: 8px;
-            background: red;
         }
     }
     .statusesWrapper {
@@ -61,9 +67,11 @@
             height: 36px;
             border-radius: 72px;
             font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: #24252c;
+            @include flex-center;
+        }
+        .statusSelected {
+            color: $White;
         }
     }
 }

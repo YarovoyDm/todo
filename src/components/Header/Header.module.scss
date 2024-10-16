@@ -1,11 +1,11 @@
+@import "scss/_mixins.scss";
+@import "scss/_variables.scss";
+
 .header {
     height: 80px;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-center;
     font-size: 19px;
     font-weight: 600;
-    border-bottom: solid 1px red;
-    background: white;
+    background: $White;
 }

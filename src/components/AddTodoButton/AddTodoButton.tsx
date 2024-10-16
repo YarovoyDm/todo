@@ -1,8 +1,8 @@
 import React from "react";
+import { ADD } from "constants/icons";
+import Icon from "../Icon/Icon";
 
 import styles from "./AddTodoButton.module.scss";
-import { ADD } from "../../constants/icons";
-import Icon from "../Icon/Icon";
 
 type IProps = {
     onClick?: () => void;

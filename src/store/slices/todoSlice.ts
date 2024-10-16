@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TODO } from "../../constants/todo";
-import { ITodo, Todos } from "../../types/todo";
+import { TODO } from "constants/todo";
+import { ITodo, Todos } from "types/todo";
 
 const initialTodosState = {
     todos: [],
@@ -17,14 +17,22 @@ const todosSlice = createSlice({
             state: Todos,
             action: PayloadAction<{
                 id: number;
-                updatedTodo: { title: string; description: string };
+                title: string;
+                description: string;
+                status: string;
+                userId: string;
             }>,
         ) {
-            const { id, updatedTodo } = action.payload;
-            const index = state.todos.findIndex(todo => todo.id === id);
+            const updatedTodo = action.payload;
+            const index = state.todos.findIndex(
+                todo => todo.id === updatedTodo.id,
+            );
 
             if (index !== -1) {
-                state.todos[index] = { ...state.todos[index], ...updatedTodo };
+                state.todos[index] = {
+                    ...state.todos[index],
+                    ...updatedTodo,
+                };
             }
         },
         updateTodoStatus(
@@ -44,7 +52,7 @@ const todosSlice = createSlice({
             );
         },
         addTodo(state: Todos, action: PayloadAction<ITodo>) {
-            state.todos?.push(action.payload);
+            state.todos.push(action.payload);
         },
     },
 });

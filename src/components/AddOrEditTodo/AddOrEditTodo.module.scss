@@ -1,8 +1,10 @@
+@import "scss/_variables.scss";
+
 .modal {
     position: absolute;
     height: calc(390px - 40px);
     width: calc(100vw - 84px);
-    background: white;
+    background: $White;
     bottom: 100px;
     border-radius: 15px;
     padding: 20px;
@@ -11,21 +13,23 @@
     box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.04);
     input {
         height: 40px;
-        background: #fcfaff;
+        background: $Magnolia;
         border-radius: 8px;
         border: none;
         font-size: 16px;
         margin-bottom: 10px;
+        padding: 0 15px;
         &::placeholder {
             font-size: 16px;
         }
     }
     textarea {
         height: 250px;
-        background: #fcfaff;
+        background: $Magnolia;
         border-radius: 8px;
         border: none;
         font-size: 16px;
+        padding: 0 15px;
         &::placeholder {
             font-size: 16px;
         }
@@ -40,18 +44,23 @@
         justify-content: space-between;
         margin-top: 20px;
         height: 36px;
-        button {
+        .button {
             height: 100%;
             width: 120px;
             font-size: 16px;
-            background: #5f33e1;
-            color: white;
+            background: $Purple_heart;
+            color: $White;
             border-radius: 72px;
+            border: none;
             &:first-child {
-                color: #5f33e1;
+                color: $Purple_heart;
                 background: white;
-                border: solid 1px #5f33e1;
+                border: solid 1px $Purple_heart;
             }
+        }
+        .disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
     }
 }

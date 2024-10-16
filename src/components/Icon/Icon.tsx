@@ -1,7 +1,7 @@
-import { ReactComponent as Delete } from "../../assets/Delete.svg";
-import { ReactComponent as Edit } from "../../assets/Edit.svg";
-import { ReactComponent as Add } from "../../assets/Add.svg";
-import { ADD, DELETE, EDIT } from "../../constants/icons";
+import { ReactComponent as Delete } from "assets/Delete.svg";
+import { ReactComponent as Edit } from "assets/Edit.svg";
+import { ReactComponent as Add } from "assets/Add.svg";
+import { ADD, DELETE, EDIT } from "constants/icons";
 
 type IProps = {
     name: string;

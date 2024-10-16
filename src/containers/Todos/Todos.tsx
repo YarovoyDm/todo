@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from "react";
-import background from "../../assets/background.png";
+import React, { useState } from "react";
+import Todo from "components/Todo/Todo";
+import AddTodoButton from "components/AddTodoButton/AddTodoButton";
+import AddOrEditTodo from "components/AddOrEditTodo/AddOrEditTodo";
+import { useAppSelector } from "store";
+import { selectTodos } from "store/selectors/todos";
+import { ITodo } from "types/todo";
 
 import styles from "./Todos.module.scss";
-import Todo from "../../components/Todo/Todo";
-import AddTodoButton from "../../components/AddTodoButton/AddTodoButton";
-import { useAppDispatch, useAppSelector } from "../../store";
-import { selectTodos } from "../../store/selectors/todos";
-import AddOrEditTodo from "../../components/AddOrEditTodo/AddOrEditTodo";
-import { ITodo } from "../../types/todo";
-import axios from "axios";
-import { addTodo, fetchTodosList } from "../../store/slices/todoSlice";
-import { fetchTodos } from "../../api/fetchTodos";
 
-const Todos = () => {
+const Todos: React.FC = () => {
     const todos = useAppSelector(selectTodos);
-    const dispatch = useAppDispatch();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [todoForEditing, setTodoForEditing] = useState<ITodo | null>(null);
 
@@ -22,19 +17,8 @@ const Todos = () => {
         setIsModalOpen(prev => !prev);
     };
 
-    console.log("todos", todos);
-
-    useEffect(() => {
-        fetchTodos().then(res => {
-            dispatch(fetchTodosList(res));
-        });
-    }, []);
-
     return (
-        <div
-            className={styles.todos}
-            style={{ backgroundImage: `url(${background})` }}
-        >
+        <div className={styles.todos}>
             {todos?.length ? (
                 todos.map(todo => {
                     return (
@@ -47,7 +31,7 @@ const Todos = () => {
                     );
                 })
             ) : (
-                <div>No</div>
+                <div className={styles.empty}>There is no todo yet :(</div>
             )}
             {isModalOpen && (
                 <AddOrEditTodo

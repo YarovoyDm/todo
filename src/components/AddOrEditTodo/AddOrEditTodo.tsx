@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+import cn from "classnames";
+import { addNewTodo } from "api/addNewTodo";
+import { updateTodoById } from "api/updateTodoById";
+import { useAppDispatch } from "store";
+import { addTodo, updateTodo } from "store/slices/todoSlice";
+import { ITodo } from "types/todo";
 
 import styles from "./AddOrEditTodo.module.scss";
-import { ITodo } from "../../types/todo";
-import { useAppDispatch } from "../../store";
-import { addTodo, updateTodo } from "../../store/slices/todoSlice";
-import { addNewTodo } from "../../api/addNewTodo";
-import { updateTodoById } from "../../api/updateTodoById";
 
 type IProps = {
     onModalChange: () => void;
@@ -31,13 +32,13 @@ const AddOrEditTodo = ({ onModalChange, setTodoForEditing, todo }: IProps) => {
         }));
     };
 
-    const closeModal = () => {
+    const closeModal = useCallback(() => {
         onModalChange();
         setValues({ input: "", textarae: "" });
         setTodoForEditing(null);
-    };
+    }, [onModalChange, setTodoForEditing]);
 
-    const onDoneButtonClick = () => {
+    const onDoneButtonClick = useCallback(() => {
         onModalChange();
         setValues({ input: "", textarae: "" });
         setTodoForEditing(null);
@@ -52,7 +53,7 @@ const AddOrEditTodo = ({ onModalChange, setTodoForEditing, todo }: IProps) => {
         addNewTodo({ title: values.input, description: values.textarae }).then(
             res => dispatch(addTodo(res)),
         );
-    };
+    }, [onModalChange, setTodoForEditing]);
 
     return (
         <div className={styles.modal}>
@@ -69,8 +70,18 @@ const AddOrEditTodo = ({ onModalChange, setTodoForEditing, todo }: IProps) => {
                 value={values.textarae}
             />
             <div className={styles.actionButtons}>
-                <button onClick={closeModal}>Cancel</button>
-                <button onClick={onDoneButtonClick}>Done</button>
+                <button onClick={closeModal} className={styles.button}>
+                    Cancel
+                </button>
+                <button
+                    onClick={onDoneButtonClick}
+                    className={cn(styles.button, {
+                        [styles.disabled]: !values.input || !values.textarae,
+                    })}
+                    disabled={!values.input || !values.textarae}
+                >
+                    Done
+                </button>
             </div>
         </div>
     );

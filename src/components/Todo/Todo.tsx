@@ -1,13 +1,13 @@
-import React, { useMemo, useState } from "react";
-
-import { DELETE, EDIT } from "../../constants/icons";
+import React, { useCallback, useMemo, useState } from "react";
+import cn from "classnames";
+import { deleteTodoById } from "api/deleteTodoById";
+import { updateTodoStatusById } from "api/updateTodoStatusById";
+import { TODO_STATUS_MAP } from "constants/todo";
+import { DELETE, EDIT } from "constants/icons";
+import { useAppDispatch } from "store";
+import { removeTodo, updateTodoStatus } from "store/slices/todoSlice";
+import { ITodo } from "types/todo";
 import Icon from "../Icon/Icon";
-import { TODO_STATUS_MAP } from "../../constants/todo";
-import { ITodo } from "../../types/todo";
-import { useAppDispatch } from "../../store";
-import { removeTodo, updateTodoStatus } from "../../store/slices/todoSlice";
-import { deleteTodoById } from "../../api/deleteTodoById";
-import { updateTodoStatusById } from "../../api/updateTodoStatusById";
 
 import styles from "./Todo.module.scss";
 
@@ -32,7 +32,7 @@ const Todo = ({
     const getCurrentStatusColor = useMemo(
         () =>
             TODO_STATUS_MAP.filter(
-                item => item.name.toLowerCase() === todoStatus.toLowerCase(),
+                item => item.key === todoStatus.toLowerCase(),
             )[0].color,
         [TODO_STATUS_MAP, todoStatus],
     );
@@ -40,7 +40,10 @@ const Todo = ({
     const statusChange =
         ({ id, newStatus }: { id: number; newStatus: string }) =>
         () => {
-            updateTodoStatusById({ id, status: newStatus.toLowerCase() });
+            updateTodoStatusById({
+                id,
+                status: newStatus.toLowerCase().replace(/[\s']/g, ""),
+            });
             dispatch(updateTodoStatus({ id, status: newStatus }));
             onTodoViewChange();
         };
@@ -50,7 +53,7 @@ const Todo = ({
         dispatch(removeTodo(id));
     };
 
-    const editTodo = () => {
+    const editTodo = useCallback(() => {
         setIsModalOpen(true);
         setTodoForEditing({
             id,
@@ -58,7 +61,7 @@ const Todo = ({
             description,
             status: todoStatus,
         });
-    };
+    }, [setIsModalOpen, setTodoForEditing]);
 
     return (
         <div className={styles.todo}>
@@ -79,21 +82,22 @@ const Todo = ({
             {isTodoUnroll && (
                 <div className={styles.statusesWrapper}>
                     {TODO_STATUS_MAP.map(status => {
-                        const newBackground =
-                            status.name.toLowerCase() ===
-                            todoStatus.toLowerCase()
-                                ? status.color
-                                : "white";
+                        const isSelected =
+                            status.key === todoStatus.toLowerCase();
 
                         return (
                             <div
-                                className={styles.statusItem}
+                                className={cn(styles.statusItem, {
+                                    [styles.statusSelected]: isSelected,
+                                })}
                                 onClick={statusChange({
                                     id,
-                                    newStatus: status.name,
+                                    newStatus: status.key,
                                 })}
                                 style={{
-                                    background: newBackground,
+                                    background: isSelected
+                                        ? status.color
+                                        : "white",
                                     border: `solid 1px ${status.color}`,
                                 }}
                             >

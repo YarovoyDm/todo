@@ -6,7 +6,7 @@ export const fetchTodos = async () => {
 
         return response.data;
     } catch (error) {
-        console.error("Помилка реєстрації:", error);
+        console.error(error);
         throw error;
     }
 };
