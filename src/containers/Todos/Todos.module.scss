@@ -1,0 +1,14 @@
+.todos {
+    width: calc(100% - 44px);
+    height: 100vh;
+    padding: 0 22px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-y: scroll;
+}
+
+@supports (height: 100dvh) {
+    .todos {
+        height: calc(100dvh - 80px);
+    }
+}

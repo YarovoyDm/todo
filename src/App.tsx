@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import styles from "./App.module.scss";
+import Header from "./components/Header/Header";
+
+import Todos from "./containers/Todos/Todos";
+import API from "./axiosConfig";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const token = sessionStorage.getItem("accessToken");
+
+    useEffect(() => {
+        !token && API.post("/auth");
+    }, [token]);
+
+    return (
+        <div className={styles.App}>
+            <div className={styles.desktopVersion}>
+                Please, go to mobile version
+            </div>
+            <div className={styles.mobileVersion}>
+                <Header />
+                <Todos />
+            </div>
+        </div>
+    );
 }
 
 export default App;

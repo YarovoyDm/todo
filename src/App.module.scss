@@ -1,0 +1,34 @@
+html,
+body {
+    height: 100%;
+}
+
+html {
+    font-size: 16px; /* Задайте базовий розмір шрифту */
+}
+
+.App {
+    height: 100%;
+    padding-bottom: env(safe-area-inset-bottom);
+    .desktopVersion {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+    }
+    .mobileVersion {
+        display: none;
+    }
+    @media only screen and (max-width: 768px) {
+        .mobileVersion {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .desktopVersion {
+            display: none;
+        }
+    }
+}

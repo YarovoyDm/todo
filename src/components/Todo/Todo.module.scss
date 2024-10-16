@@ -1,0 +1,69 @@
+.todo {
+    min-height: 63px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.04);
+    padding: 15px 15px 0 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 20px;
+    .mainInfoWrapper {
+        width: calc(100% - 20px);
+        padding-left: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .todoMainInfo {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            .todoName {
+                font-size: 9px;
+                color: #6e6a7c;
+            }
+            .todoDesription {
+                color: #24252c;
+                font-size: 14px;
+                width: 200px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+        .actions {
+            width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .miniStatus {
+            width: 16px;
+            height: 16px;
+            border-radius: 16px;
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: red;
+        }
+    }
+    .statusesWrapper {
+        width: 100%;
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .statusItem {
+            width: 80px;
+            height: 36px;
+            border-radius: 72px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
